@@ -39,7 +39,7 @@ class Particle {
         this.y = y;
         this.vx = random(-1,1);
         this.vy = random(-1,1)
-        this.alpha = random(150);
+        this.alpha = 250
         this.valpha = 1 //random(-1,1);
         this.r = 2.5
     }
@@ -51,7 +51,8 @@ class Particle {
     update(){
         this.x += this.vx
         this.y += this.vy
-        this.alpha += this.valpha;
+        //this.alpha += this.valpha;
+        this.alpha = 250;
         this.checkEdgeCollision();
         this.intersects();
      
@@ -88,6 +89,6 @@ class Particle {
         }
     }
     changeColor(){
-        this.alpha = color(0)
+        this.alpha = 0
     }
 }
