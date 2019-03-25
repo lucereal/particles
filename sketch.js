@@ -1,3 +1,5 @@
+p5.disableFriendlyErrors = true; // disables FES
+
 var w = window,
     d = document,
     e = d.documentElement,
@@ -10,17 +12,19 @@ let mouse;
 //acts like a constructor
 function setup() {
     createCanvas(x, y);
-    for (let i = 0; i < x / 20; i++) {
+    for (let i = 0; i < x / 25; i++) {
         p = new Particle(random(0, x), random(0, y));
         particles.push(p);
     }
 }
 
 function draw() {
-    // background(75)
-    background(151, 127, 105);
     background(182, 25, 36)
-
+    let fps = frameRate();
+    fill(255);
+    stroke(255);
+    textSize(20);
+    text("FPS: " + fps.toFixed(2), x/2,y/2);
     particles.forEach((p) => {
         p.show();
         p.update();
@@ -89,19 +93,19 @@ class Particle {
         if (dist(this.location.x, this.location.y, mouseX, mouseY) < (this.r + mouser)) {
             if (this.location.x < mouseX) {
                 //this.velocity.x = -pushv;
-                this.location.add(createVector(-pushv,this.velocity.y))
+                this.location.add(createVector(-pushv, this.velocity.y))
             }
             if (this.location.x > mouseX) {
                 //this.velocity.x = pushv;
-                this.location.add(createVector(pushv,this.velocity.y))
+                this.location.add(createVector(pushv, this.velocity.y))
             }
             if (this.location.y > mouseY) {
                 //this.velocity.y = pushv;
-                this.location.add(createVector(this.velocity.x,pushv))
+                this.location.add(createVector(this.velocity.x, pushv))
             }
             if (this.location.y < mouseY) {
                 // this.velocity.y = -pushv;
-                this.location.add(createVector(this.velocity.x,-pushv))
+                this.location.add(createVector(this.velocity.x, -pushv))
             }
         }
     }
