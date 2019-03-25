@@ -67,8 +67,8 @@ class Particle {
                 if(dist(this.x,this.y,p.x,p.y) < ((this.r + p.r) * 10)){          
                     stroke(0);
                     line(this.x,this.y,p.x,p.y)
-                    this.changeColor()
-                    p.changeColor()
+                    this.changeColor(0)
+                    p.changeColor(0)
                     
                 }
                 if(dist(this.x,this.y,p.x,p.y) < ((this.r + p.r))){
@@ -88,7 +88,7 @@ class Particle {
             this.vy *= -1;
         }
     }
-    changeColor(){
-        this.alpha = 0
+    changeColor(color){
+        this.alpha = color
     }
 }
