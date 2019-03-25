@@ -10,12 +10,10 @@ let mouse;
 //acts like a constructor
 function setup() {
     createCanvas(x, y);
-    for (let i = 0; i < x/20; i++) {
+    for (let i = 0; i < x / 20; i++) {
         p = new Particle(random(0, x), random(0, y));
         particles.push(p);
     }
-
-
 }
 
 function draw() {
@@ -26,13 +24,8 @@ function draw() {
     particles.forEach((p) => {
         p.show();
         p.update();
-
     })
-
-
-
 }
-
 
 class Particle {
 
@@ -52,8 +45,7 @@ class Particle {
         ellipse(this.location.x, this.location.y, 2 * this.r)
     }
     update() {
-     
-        //this.acceleration = createVector(0,0)
+
         this.velocity.add(this.acceleration);
         this.location.add(this.velocity);
         this.velocity.limit(1)
@@ -61,7 +53,7 @@ class Particle {
         this.nearMouse()
         this.checkEdgeCollision();
         this.intersects();
-        
+
 
     }
     finished() {
@@ -92,39 +84,33 @@ class Particle {
         noFill()
         stroke(0)
         noStroke()
-        ellipse(mouseX, mouseY, mouser*2)
+        ellipse(mouseX, mouseY, mouser * 2)
 
-            if (dist(this.location.x, this.location.y, mouseX, mouseY) < (this.r + mouser)) {
-                if(this.location.x < mouseX){
-                      this.velocity.x = -pushv;
-                    // this.location.x = mouseX - mouser
-                }
-                if(this.location.x > mouseX){
-                    this.velocity.x = pushv;
-                    //this.location.x = mouseX + mouser
-
-                }
-                if(this.location.y > mouseY){
-                    this.velocity.y = pushv;
-                    //this.location.y = mouseY + mouser
-
-                }
-                if(this.location.y < mouseY){
-                    this.velocity.y = -pushv;
-                    //this.location.y = mouseY - mouser
-
-                }
-            
+        if (dist(this.location.x, this.location.y, mouseX, mouseY) < (this.r + mouser)) {
+            if (this.location.x < mouseX) {
+                //this.velocity.x = -pushv;
+                this.location.add(createVector(-pushv,this.velocity.y))
+            }
+            if (this.location.x > mouseX) {
+                //this.velocity.x = pushv;
+                this.location.add(createVector(pushv,this.velocity.y))
+            }
+            if (this.location.y > mouseY) {
+                //this.velocity.y = pushv;
+                this.location.add(createVector(this.velocity.x,pushv))
+            }
+            if (this.location.y < mouseY) {
+                // this.velocity.y = -pushv;
+                this.location.add(createVector(this.velocity.x,-pushv))
+            }
         }
-
-
     }
     checkEdgeCollision() {
         if (this.location.x >= x || this.location.x <= 0) {
-            this.velocity.x *= random(-2,-1);
+            this.velocity.x *= random(-2, -1);
         }
         if (this.location.y >= y || this.location.y <= 0) {
-            this.velocity.y *= random(-2,-1);
+            this.velocity.y *= random(-2, -1);
         }
     }
     changeColor(color) {
